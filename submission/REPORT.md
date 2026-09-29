@@ -7,9 +7,9 @@
 - **Họ và tên: Nguyễn Lê Phúc Thắng**
 - **MSSV:** 2A202602638
 - **Lớp:** K4-L3A
-- **Repository URL:** Chưa tạo repo cá nhân
+- **Repository URL:** https://github.com/pthang228/K4-L3A-Day13-Monitoring-LLMOps
 - **Commit SHA cuối:** Điền sau commit cuối
-- **Challenge ID:** Chưa được Lab Coach release
+- **Challenge ID:** `day13-k4-l3a-monitoring-llmops-v1`
 - **Tên project Langfuse cá nhân:** `day13-k4-l3a-2A202602638`
 
 ## 2. Evidence index
@@ -34,13 +34,14 @@ output đầy đủ nằm tại `evidence/00-baseline-reconstructed.txt`.
 | Dashboard runtime | `evidence/11-dashboard-overview.png` |
 | Incident metric | `evidence/12-incident-metric.png` |
 | Incident log | `evidence/13-incident-log.png` |
-| Incident trace | `evidence/14-incident-trace.png` |
+| Incident trace | `evidence/14-incident-trace.png`, `evidence/14-incident-trace.txt` |
+| Remediation verification | `evidence/15-remediation-verification.txt` |
 
 ## 3. Kết quả kỹ thuật
 
 | Nội dung | Baseline | Kết quả cuối | Nhận xét |
 |---|---|---|---|
-| `validate_logs.py` | 30/100 | 100/100 | Baseline thiếu correlation/enrichment; final không thiếu trường và có 10 correlation ID |
+| `validate_logs.py` | 30/100 | 100/100 | Baseline thiếu correlation/enrichment; final không thiếu trường và có 18 correlation ID |
 | `validate_dashboard.py` | 6/6 panel | 6/6 panel | Starter đã có contract; final bổ sung dashboard runtime đọc trực tiếp `data/logs.jsonl` |
 | `pytest` | 22 passed | 26 passed | Bổ sung test correlation ID, dashboard runtime và PII |
 | Số traces hợp lệ | 0 | ≥10 | Final workload có 10 root traces và 30 observations |
@@ -75,14 +76,14 @@ output đầy đủ nằm tại `evidence/00-baseline-reconstructed.txt`.
 
 ## 7. Điều tra challenge
 
-- **Challenge ID:** Chưa được Lab Coach release
-- **Khoảng thời gian điều tra:** Chờ challenge chính thức
-- **Triệu chứng từ metrics:** Chờ challenge chính thức
-- **Log line và correlation ID liên quan:** Chờ challenge chính thức
-- **Trace ID và span gây ảnh hưởng:** Chờ challenge chính thức
-- **Root cause:** Chờ challenge chính thức
-- **Fix action:** Chờ challenge chính thức
-- **Preventive measure:** Chờ challenge chính thức
+- **Challenge ID:** `day13-k4-l3a-monitoring-llmops-v1`
+- **Khoảng thời gian điều tra:** 2026-09-29 09:44:40–09:44:55 UTC (16:44:40–16:44:55 Asia/Ho_Chi_Minh).
+- **Triệu chứng từ metrics:** Năm request feature `monitoring` đều vượt threshold 2,000 ms; latency lần lượt 3,766/2,653/2,653/2,652/2,653 ms, P95 là 3,766 ms. TTFT P95 vẫn 50 ms, error rate 0%, nên triệu chứng nằm trước generation và không phải lỗi request.
+- **Log line và correlation ID liên quan:** `response_sent` lúc `2026-09-29T09:44:44.387646Z`, `correlation_id=req-2527dfaa`, `latency_ms=3766`, `trace_id=ee3fb064417066df21095f9e4ee22cf8`, `tool_name=retrieval`, `tool_success=true`.
+- **Trace ID và span gây ảnh hưởng:** Trace `ee3fb064417066df21095f9e4ee22cf8`; root `lab-agent-run` 3.767 s, child `retrieval` 2.502 s, child `llm-generation` 0.151 s. Retrieval là span chiếm phần lớn latency.
+- **Root cause:** Challenge bật `rag_slow`, mô phỏng vector store/retrieval chậm 2.5 giây. Generation, token/cost và TTFT không tăng tương ứng nên không phải nguyên nhân.
+- **Fix action:** Tắt incident sau điều tra và chạy lại cùng feature `monitoring`; request hậu kiểm `req-50cc435d` đạt 153 ms, thấp hơn threshold 2,000 ms. Trong hệ thống thật cần khôi phục vector store, áp timeout/circuit breaker và dùng cache hoặc fallback không-RAG khi retrieval vượt latency budget.
+- **Preventive measure:** Theo dõi riêng retrieval latency/success, đặt dependency SLO và alert theo P95, chạy load test trước release, giới hạn retry và duy trì cache/fallback đã được diễn tập.
 
 ## 8. Giải thích và tự đánh giá
 
@@ -92,13 +93,13 @@ output đầy đủ nằm tại `evidence/00-baseline-reconstructed.txt`.
 - **Cách hiểu luồng Metrics → Logs → Traces:** Metrics xác định loại triệu chứng và cửa sổ thời gian; structured log lọc ra request cụ thể cùng `correlation_id`; trace cùng ID cho biết retrieval hay generation là span chậm/lỗi, từ đó mới kết luận root cause.
 - **Vai trò của prompt version, token/cost, SLO hoặc rollback trong vận hành LLM:** Prompt version cho biết chính xác logic nào phục vụ request; token/cost kiểm soát chi phí; SLO biến trải nghiệm thành mục tiêu đo được; rollback label giúp quay lại prompt ổn định mà không đổi source/deploy lại ứng dụng.
 - **Điều quan trọng nhất đã học:** Một tín hiệu riêng lẻ không đủ để điều tra; correlation giữa metric, log và trace mới tạo thành bằng chứng vận hành.
-- **Hạn chế hoặc phần chưa hoàn thành, nếu có:** Chưa có challenge chính thức, họ tên/repository URL/commit SHA cuối và ba evidence incident. Baseline không được chụp tại thời điểm trước khi sửa; số liệu baseline trong bảng được tái dựng minh bạch từ đúng starter commit `13b6066` và lưu output riêng.
+- **Hạn chế hoặc phần chưa hoàn thành, nếu có:** Còn thiếu commit SHA cuối. Baseline không được chụp tại thời điểm trước khi sửa; số liệu baseline trong bảng được tái dựng minh bạch từ đúng starter commit `13b6066` và lưu output riêng.
 
 ## 9. Checklist trước khi nộp
 
 - [ ] Kết quả và evidence thuộc commit SHA cuối.
 - [x] Tất cả ảnh/output hiện có mở được bằng đường dẫn tương đối.
-- [ ] Incident evidence nối đúng metric → log → trace.
+- [x] Incident evidence nối đúng metric → log → trace.
 - [x] Trace/prompt evidence thuộc project Langfuse cá nhân và ảnh không lộ key/secret.
 - [x] Repository chạy lại được theo README.
 - [x] Không có secret, API key, PII thô hoặc evidence của người khác/lớp khác.

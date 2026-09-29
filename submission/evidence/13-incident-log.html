@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Incident log evidence</title>
+  <style>
+    body { margin: 0; background: #07111f; color: #e8f0ff; font: 18px/1.55 Consolas, monospace; }
+    main { width: 1420px; margin: 60px auto; }
+    h1 { font: 700 42px/1.1 Segoe UI, sans-serif; margin: 0 0 12px; }
+    .sub { color: #8fa8cc; margin-bottom: 32px; }
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+    .fact { background: #111f33; border: 1px solid #29415f; border-radius: 14px; padding: 18px; }
+    .label { color: #8fa8cc; font: 13px Segoe UI, sans-serif; text-transform: uppercase; letter-spacing: .08em; }
+    .value { margin-top: 8px; color: #42dfca; font-weight: 700; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #0c1829; border: 1px solid #29415f; border-left: 5px solid #ffb24c; border-radius: 14px; padding: 26px; }
+    mark { background: #3a2d14; color: #ffd28c; padding: 2px 5px; }
+  </style>
+</head>
+<body><main>
+  <h1>Incident log evidence</h1>
+  <div class="sub">Source: data/logs.jsonl · challenge day13-k4-l3a-monitoring-llmops-v1</div>
+  <section class="facts">
+    <div class="fact"><div class="label">Correlation ID</div><div class="value">req-2527dfaa</div></div>
+    <div class="fact"><div class="label">Trace ID</div><div class="value">ee3fb064…e4ee22cf8</div></div>
+    <div class="fact"><div class="label">Latency</div><div class="value">3,766 ms</div></div>
+    <div class="fact"><div class="label">Feature</div><div class="value">monitoring</div></div>
+  </section>
+  <pre>{
+  "event": "response_sent",
+  "ts": "2026-09-29T09:44:44.387646Z",
+  "correlation_id": <mark>"req-2527dfaa"</mark>,
+  "trace_id": <mark>"ee3fb064417066df21095f9e4ee22cf8"</mark>,
+  "feature": "monitoring",
+  "latency_ms": <mark>3766</mark>,
+  "ttft_ms": 50,
+  "tool_name": "retrieval",
+  "tool_success": true,
+  "prompt_name": "day13-chat",
+  "prompt_label": "production",
+  "prompt_version": "1",
+  "tokens_in": 35,
+  "tokens_out": 179,
+  "cost_usd": 0.00279,
+  "quality_score": 0.8
+}</pre>
+</main></body></html>

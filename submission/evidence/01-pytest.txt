@@ -3,4 +3,4 @@ Final verification — 2026-09-29
 Command: python -m pytest -q
 Result:
 ..........................                                               [100%]
-26 passed in 2.38s
+26 passed in 2.94s

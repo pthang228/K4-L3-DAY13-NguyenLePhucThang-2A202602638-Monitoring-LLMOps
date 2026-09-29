@@ -1,0 +1,19 @@
+Langfuse Observations API v2 verification
+
+Project: day13-k4-l3a-2A202602638
+Challenge: day13-k4-l3a-monitoring-llmops-v1
+Trace ID: ee3fb064417066df21095f9e4ee22cf8
+Correlation ID: req-2527dfaa
+
+Observation tree:
+- lab-agent-run (AGENT/root): 3.767 seconds
+- retrieval (RETRIEVER/child): 2.502 seconds, success=true
+- llm-generation (GENERATION/child): 0.151 seconds
+
+Generation details:
+- model: claude-sonnet-4-5
+- input/output/total tokens: 35/179/214
+- total cost: USD 0.00279
+- prompt: day13-chat version 1, label production
+
+Conclusion: retrieval dominates request latency while generation remains fast.

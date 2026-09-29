@@ -1,0 +1,13 @@
+Post-remediation verification — 2026-09-29
+
+Incident: rag_slow
+Action: disabled at 2026-09-29T09:46:06.363560Z
+Verification request feature: monitoring
+Correlation ID: req-50cc435d
+Trace ID: d342eee2721e7a0a7294037e87396c8f
+Latency: 153 ms
+TTFT: 50 ms
+Retrieval success: true
+Prompt: day13-chat v1 (production)
+
+Result: latency recovered below the challenge threshold of 2,000 ms.
