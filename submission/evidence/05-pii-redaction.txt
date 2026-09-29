@@ -1,0 +1,12 @@
+PII redaction evidence from final runtime logs.
+
+Email:
+{"correlation_id":"req-ff3bc91f","message_preview":"What is your refund policy? My email is [REDACTED_EMAIL]"}
+
+Vietnamese phone:
+{"correlation_id":"req-a7ceb2df","message_preview":"Here is my phone [REDACTED_PHONE_VN], what should be logged?"}
+
+Payment card:
+{"correlation_id":"req-6c11fd34","message_preview":"What is the policy for PII and credit card [REDACTED_CREDIT_CARD]?"}
+
+Independent validator result: Potential PII leaks detected: 0.

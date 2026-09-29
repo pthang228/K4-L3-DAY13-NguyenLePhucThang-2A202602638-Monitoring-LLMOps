@@ -1,0 +1,24 @@
+Baseline reconstructed from starter commit 13b6066 on 2026-09-29.
+
+The starter commit was extracted to an isolated temporary directory and run with
+the same 10-query workload. Langfuse was disabled because credentials are not
+part of the tracked starter repository.
+
+validate_logs.py: 30/100
+- Total records: 21
+- Missing required fields: 20
+- Missing enrichment: 20
+- Unique correlation IDs: 0
+- PII leaks: 0
+
+validate_dashboard.py: 6/6 panel
+pytest: 22 passed
+Valid Langfuse traces: 0
+Latency P95: 165 ms
+TTFT P95: 51 ms
+Retrieval success: 100%
+Quality average: 0.88
+Total cost: USD 0.020379
+
+This is explicitly a reconstructed baseline, not a contemporaneous screenshot
+captured before implementation.

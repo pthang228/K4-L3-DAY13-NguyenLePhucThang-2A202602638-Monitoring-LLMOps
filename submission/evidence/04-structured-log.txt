@@ -1,0 +1,7 @@
+Structured-log evidence from the final clean workload.
+
+Request:
+{"service":"api","payload":{"message_preview":"Explain why metrics traces and logs work together"},"event":"request_received","model":"claude-sonnet-4-5","feature":"qa","session_id":"s02","correlation_id":"req-b31d753b","user_id_hash":"95b6504a8bd6","env":"dev","level":"info","ts":"2026-09-29T07:43:47.804484Z"}
+
+Response for the same correlation ID:
+{"service":"api","latency_ms":990,"ttft_ms":50,"tokens_in":32,"tokens_out":134,"cost_usd":0.002106,"quality_score":0.8,"trace_id":"944c2aa095a146fc82ec899ca7302dd6","prompt_name":"day13-chat","prompt_label":"production","prompt_version":"1","prompt_source":"langfuse","tool_name":"retrieval","tool_success":true,"event":"response_sent","model":"claude-sonnet-4-5","feature":"qa","session_id":"s02","correlation_id":"req-b31d753b","user_id_hash":"95b6504a8bd6","env":"dev","level":"info","ts":"2026-09-29T07:43:49.009975Z"}

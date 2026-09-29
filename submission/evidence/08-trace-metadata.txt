@@ -1,0 +1,14 @@
+Trace metadata verification through Langfuse Observations API v2.
+
+Trace ID: 60536317e5cfb31709825e9442b5e420
+Correlation ID: req-f942055d
+Observations: 3 (lab-agent-run, retrieval, llm-generation)
+Prompt: day13-chat
+Prompt label/version/source: production / 1 / langfuse
+Generation model: claude-sonnet-4-5
+Generation usage: input=32, output=114, total=146 tokens
+Generation cost: USD 0.001806
+Retrieval success: true
+
+The corresponding UI waterfall is in 07-trace-waterfall.png and
+08-trace-metadata.png.

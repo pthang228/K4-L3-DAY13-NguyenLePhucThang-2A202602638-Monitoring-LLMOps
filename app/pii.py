@@ -8,7 +8,9 @@ PII_PATTERNS: dict[str, str] = {
     "phone_vn": r"(?<!\d)(?:\+84|0)(?:[ .-]?\d){9}(?!\d)",
     "cccd": r"\b\d{12}\b",
     "credit_card": r"\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b",
-    # TODO: Add more patterns (e.g., Passport, Vietnamese address keywords)
+    # Require an explicit label to avoid treating request IDs such as
+    # ``req-a1234567`` as passport numbers.
+    "passport": r"(?i)\bpassport\s*(?:no\.?|number)?\s*[:#-]?\s*[A-Z][0-9]{7}\b",
 }
 
 

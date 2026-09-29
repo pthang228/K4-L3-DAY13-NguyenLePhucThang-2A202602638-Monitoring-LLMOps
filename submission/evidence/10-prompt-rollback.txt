@@ -1,0 +1,17 @@
+Prompt promote/rollback verification through Langfuse Observations API v2.
+
+Candidate trace:
+- Trace ID: 323d01d3b23f301b13f291b852265fa8
+- prompt_version=2, prompt_label=candidate, prompt_source=langfuse
+
+Promoted production trace:
+- Trace ID: ddb0a73c27234204b3cfccbf7ce50ac8
+- prompt_version=2, prompt_label=production, prompt_source=langfuse
+
+Trace after rollback:
+- Trace ID: 60536317e5cfb31709825e9442b5e420
+- prompt_version=1, prompt_label=production, prompt_source=langfuse
+
+Final label state:
+- v1: baseline, production
+- v2: candidate, latest
